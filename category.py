@@ -1,5 +1,6 @@
 from product import Product
 
+
 class Category:
     total_categories = 0      # общее количество категорий
     total_products = 0        # общее количество товаров
