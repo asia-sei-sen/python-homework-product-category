@@ -63,4 +63,4 @@ python main.py
 ├── README.md
 └── requirements.txt
 ```
-
+26.06.25
