@@ -1,5 +1,6 @@
 from product import Product
 
+
 class Category:
     total_categories = 0
     total_products = 0
