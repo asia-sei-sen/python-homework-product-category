@@ -1,21 +1,42 @@
-class Product:
+from abc import ABC, abstractmethod
+
+# 1. Абстрактный базовый класс
+
+
+class BaseProduct(ABC):
     def __init__(self, name: str, description: str, price: float, quantity: int):
         self.name = name
         self.description = description
-        self.__price = price  # приватный атрибут
+        self._price = price
         self.quantity = quantity
 
     @property
     def price(self):
-        return self.__price
+        return self._price
 
     @price.setter
     def price(self, new_price):
         if new_price > 0:
-            self.__price = new_price
+            self._price = new_price
         else:
             print("Цена не должна быть нулевая или отрицательная")
 
+    @abstractmethod
+    def __str__(self):
+        pass
+
+
+# 2. Миксин
+class LogMixin:
+    def __init__(self, *args, **kwargs):
+        cls_name = self.__class__.__name__
+        args_str = ", ".join(repr(arg) for arg in args)
+        print(f"{cls_name}({args_str})")
+        super().__init__(*args, **kwargs)
+
+
+# 3. Product с множественным наследованием
+class Product(LogMixin, BaseProduct):
     @classmethod
     def new_product(cls, data_dict):
         return cls(
@@ -34,6 +55,7 @@ class Product:
         return self.price * self.quantity + other.price * other.quantity
 
 
+# 4. Наследники
 class Smartphone(Product):
     def __init__(self, name, description, price, quantity, efficiency, model, memory, color):
         super().__init__(name, description, price, quantity)
