@@ -37,6 +37,11 @@ class LogMixin:
 
 # 3. Product с множественным наследованием
 class Product(LogMixin, BaseProduct):
+    def __init__(self, name, description, price, quantity):
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
+        super().__init__(name, description, price, quantity)
+
     @classmethod
     def new_product(cls, data_dict):
         return cls(

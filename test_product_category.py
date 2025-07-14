@@ -23,4 +23,3 @@ def test_add_product_rejects_non_product():
     category.add_product(phone)  # OK
     with pytest.raises(TypeError):
         category.add_product("not a product")
-
